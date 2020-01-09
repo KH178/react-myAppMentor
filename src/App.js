@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react';
+import {Route, Switch} from 'react-router-dom'; 
+import axios from 'axios';
+import './styles/body.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+
+//Pages
+import Home from './components/Home';
+import Profile from './components/Profile';
+import NotFound from './components/NotFound';
+
+class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { 
+            user: {}
+        }
+    }
+  async componentDidMount() {
+    //  axios.get('').then(function (response) {
+    //   this.setState = {user:response.data};
+    //  }.bind(this));
+    axios.get(`https://randomuser.me/api/`)
+       .then(res => {
+          const user = res.data.results;
+          this.setState({user:user[0]});
+      })
+
+  }
+
+    render() {
+      return (
+          <>
+        <Navbar />
+            <Route render={({location}) => (
+                <Switch location={location}>
+              <Route exact path='/' render={(routeProps) => <Home {...routeProps}/>}/>
+                  <Route exact path='/profile' render={(routeProps)=><Profile {...routeProps} user={this.state.user}/>}/>
+                  {/* <Route exact path='/' render={(routeProps)=> <Page><PaletteList palette={this.state.palettes} {...routeProps} deletePalette={this.deletePalette}/></Page>}/>
+                  <Route exact path='/palette/:id' render={(routeProps)=> <Page><Palette palette={generatePalette(this.findPalette(routeProps.match.params.id))}/></Page>}/>
+                  <Route render={(routeProps)=><Page><PaletteList palette={this.state.palettes} {...routeProps} deletePalette={this.deletePalette}/></Page>}/> */}
+                  <Route path='*' exact={true} component={NotFound} />
+                </Switch>
+          )}/>
+          </>
+        );
+    } 
 }
 
 export default App;
