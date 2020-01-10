@@ -7,9 +7,9 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
 //Pages
-import Home from './components/Home';
-import Profile from './components/Profile';
-import NotFound from './components/NotFound';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 class App extends Component {
     constructor(props) {
@@ -36,7 +36,7 @@ class App extends Component {
         <Navbar />
             <Route render={({location}) => (
                 <Switch location={location}>
-              <Route exact path='/' render={(routeProps) => <Home {...routeProps}/>}/>
+                <Route exact path='/' render={(routeProps) => <Home {...routeProps}/>}/>
                   <Route exact path='/profile' render={(routeProps)=><Profile {...routeProps} user={this.state.user}/>}/>
                   {/* <Route exact path='/' render={(routeProps)=> <Page><PaletteList palette={this.state.palettes} {...routeProps} deletePalette={this.deletePalette}/></Page>}/>
                   <Route exact path='/palette/:id' render={(routeProps)=> <Page><Palette palette={generatePalette(this.findPalette(routeProps.match.params.id))}/></Page>}/>
