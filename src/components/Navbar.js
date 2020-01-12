@@ -6,12 +6,7 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem,
-    NavbarText
+    NavLink
 } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
@@ -26,31 +21,19 @@ const NavbarComponent = (props) => {
                     <NavbarToggler onClick={toggle} />
                     <Collapse isOpen={isOpen} navbar>
                     <Nav className="mr-auto" navbar>
-                    <NavItem>
-                        <NavLink to="/profile" tag={Link}>Profile</NavLink>
+                        <NavItem>
+                            <NavLink to="/profile" tag={Link}>Profile</NavLink>
+                            </NavItem>
+                        <NavItem>
+                            <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
                         </NavItem>
-                    <NavItem>
-                        <NavLink href="https://github.com/reactstrap/reactstrap">GitHub</NavLink>
+                        <NavItem>
+                            <NavLink to="/allquestions" tag={Link}>Answers</NavLink>
                         </NavItem>
-                        <UncontrolledDropdown nav inNavbar>
-                        <DropdownToggle nav caret>
-                            Options
-                        </DropdownToggle>
-                        <DropdownMenu right>
-                            <DropdownItem>
-                            Option 1
-                            </DropdownItem>
-                            <DropdownItem>
-                            Option 2
-                            </DropdownItem>
-                            <DropdownItem divider />
-                            <DropdownItem>
-                            Reset
-                            </DropdownItem>
-                        </DropdownMenu>
-                        </UncontrolledDropdown>
+                        <NavItem>
+                            <NavLink to="/signup-login" tag={Link}>Signup/Login</NavLink>
+                        </NavItem>
                     </Nav>
-                    <NavbarText>Simple Text</NavbarText>
                     </Collapse>
                 </Navbar>
             </div>

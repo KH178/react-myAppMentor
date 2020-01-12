@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
+import axios from 'axios';
 import { createUseStyles } from 'react-jss';
 import lacation from '../images/lacation.png';
 import BagIcon from '../images/bag.png';
 import HatIcon from '../images/hat.png';
 import {Button} from 'reactstrap';
+import uuid from 'uuid';
 
 const useStyles = createUseStyles({
     '@global': {
@@ -16,7 +18,8 @@ const useStyles = createUseStyles({
     }),
     profileBanner: style=> ({
             backgroundColor: '#ffffff',
-            height: style.height,
+            minHeight: style.height,
+            height: 'fit-content',
             width: style.width,
             boxShadow: '1px 1px 5px 1px rgba(203, 203, 203, 0.75)',
             fontWeight: 'bold', // jss-plugin-camel-case turns this into 'font-weight'
@@ -44,7 +47,8 @@ const useStyles = createUseStyles({
     styleBanner: style => ({
         height: 'calc(100% / 3)',
         backgroundColor: style.stripBgCol,
-        position: 'relative'
+        position: 'relative',
+        minHeight: '10rem'
     }),
     bannerAvatar: {
         width: '50%',
@@ -122,11 +126,6 @@ const useStyles = createUseStyles({
             }
         }
     },
-    iconImg:{
-        '& img':{
-            
-        },
-    },
     qualifications:{
         position: 'absolute',
         bottom: '1rem',
@@ -135,6 +134,26 @@ const useStyles = createUseStyles({
         transform: 'translateX(-50%)',
         border: '1px solid #9db8e1',
         backgroundColor: '#f5f9ff',
+        maxHeight: '20%',
+        minHeight: '5rem',
+        overflowY: 'scroll',
+        textAlign: 'center',
+        display: 'flex',
+        justifyContent: 'center',
+        '&::-webkit-scrollbar': {
+            display: 'none'
+        },
+    },
+     qualificationsCount: {
+         maxWidth: '80%',
+         margin: 'auto',
+        '& span':{
+            fontSize: '0.9rem',
+            color: '#15234b'
+        },
+        '& span:not(:last-child)': {
+             marginRight: '10px'
+        }
     },
     '@media screen and (max-width: 768px)': {
         bannerAvatar: {
@@ -153,7 +172,7 @@ const useStyles = createUseStyles({
             position: 'relative',
             left: '50%',
             transform: 'translateX(-50%)',
-            top: '-3rem',
+            top: '-4rem',
             marginLeft: '0rem'
         },
         userName: {
@@ -187,7 +206,7 @@ const useStyles = createUseStyles({
     btnAndMore:{
         position: 'relative',
         right: '0',
-        top: '-2rem',
+        top: '-3rem',
         display: 'flex',
         flexDirection: 'column',
         margin:{
@@ -223,8 +242,10 @@ const useStyles = createUseStyles({
         '& img':{
             
         },
-        
-    },
+        },
+    qualifications: {
+        position: 'relative'
+    }
     }, 
 })
 
@@ -238,7 +259,17 @@ function ProfileInfoBanner({style,user}) {
         phone: user.phone,
         email: user.email
     };
-    
+    const [experties, setExperties] = useState(['MiM']);
+    useEffect(() => {
+        async function fetchExperties() {
+            await axios.get(`http://www.mocky.io/v2/5e1b02e43100008d324f321c`)
+                .then(res => {
+                    const data = res.data.experties;
+                    setExperties(data);
+                })
+        }
+        fetchExperties();
+    },[])
     return (
         <div className={classes.profileInfoBannerContainer}>
             <div className={classes.profileBanner}>
@@ -246,7 +277,7 @@ function ProfileInfoBanner({style,user}) {
                     <div  className={classes.parenContentDiv}>
                         <div className={classes.userInfoContainer}>
                             <div className={classes.bannerAvatar}>
-                                {userAvatar && <img src={user.picture.large}/>}
+                                {userAvatar && <img src={user.picture.large} alt="Avatar"/>}
                             </div>
                             <div className={classes.userName}>
                                 {userName && <p>{userName.first} {userName.last}</p>}
@@ -256,7 +287,7 @@ function ProfileInfoBanner({style,user}) {
                             </div>
                             <div className={classes.location}>
                                 <div className={classes.iconImg}>
-                                    <img src={lacation}/>
+                                    <img src={lacation} alt="Location Icon"/>
                                 </div>
                                 {userLocation && <p>{userLocation.city}, {userLocation.country}</p>}
                             </div>
@@ -287,7 +318,13 @@ function ProfileInfoBanner({style,user}) {
                         </div>
                     </div>
                         <div className={classes.qualifications}>
-                            
+                            <div className={classes.qualificationsCount}>
+                                {
+                                experties.map((ex,i) => (
+                                    experties.length-1 === i ? <span key={uuid()}>{ex}</span>:<span key={uuid()}>{ex} |</span>
+                                        ))
+                                    }
+                            </div>    
                         </div>
                     </div>
             </div>  

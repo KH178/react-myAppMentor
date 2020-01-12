@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
+import BannerTabs from '../components/BannerTabs';
 import ProfileInfoBanner from '../components/ProfileInfoBanner';
+import { Container, Row, Col } from 'reactstrap';
 
 const useStyles = createUseStyles({
     profile: {
@@ -15,11 +17,28 @@ const useStyles = createUseStyles({
         },
         '& span': {
             // jss-plugin-nested applies this to a child span
-            fontWeight: 'bold' // jss-plugin-camel-case turns this into 'font-weight'
+             // jss-plugin-camel-case turns this into 'font-weight'
         }
+    },
+    profileMain: {
+        width: '98%',
+        margin: '0 auto',
+        borderRadius: '0.6rem',
+        overflow: 'hidden'
+    },
+    profileExtra: {
+        
     },
     myLabel: {
         fontStyle: 'italic'
+    },
+    '@media screen and (max-width: 768px)': {
+        profile: {
+            height: '100%',
+        },
+        profileMain: {
+            width: '99%'
+        }
     }
 })
 
@@ -28,7 +47,21 @@ function Profile(props) {
 
     return (
         <div className={classes.profile}>
-            <ProfileInfoBanner style={{height: '30rem',width:'80vw',stripBgCol:'#c3d0ee'}} user={props.user}/>
+            <Container> 
+                <Row>
+                    <Col xs="12" sm="12" md="9">
+                        <div className={classes.profileMain}>
+                            <ProfileInfoBanner style={{height: '32rem',width:'100%',stripBgCol:'#c3d0ee'}} user={props.user}/>
+                            <BannerTabs style={{tabFontColor: '#295caa', bgCol: '#416aa6'}}/>
+                        </div>  
+                    </Col>  
+                    <Col xs="12" sm="12" md="9">
+                    <div className={classes.profileExtra}>
+
+                    </div>
+                    </Col>    
+                </Row>
+            </Container>      
         </div>)
 }
 
