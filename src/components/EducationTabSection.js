@@ -7,9 +7,57 @@ import ShowMoreText from './ShowMoreText';
 
 const useStyles = createUseStyles({
     educationTabSection:style=>({
-        width: style.width,
-        margin: '0 auto'
-    })
+            width: style.width,
+                margin: '0 auto'
+            }),
+            eduContainer: {
+                    '&:not(:last-child)': {
+                        borderBottom: '2px solid #d2d2d2',
+                        padding: {
+                            top: 0,
+                            bottom: '1rem',
+                        },
+                    },
+
+                    padding: {
+                        top: '1rem',
+                        bottom: '1rem',
+                    },
+                    margin: {
+                        top: '1rem',
+                        bottom: '1rem',
+                    }
+
+                },
+                expImgContr: {
+                    margin: 'auto 0',
+                    position: 'relative',
+                    minHeight: '2rem',
+                    '& img': {
+                        position: 'absolute',
+                        top: '50%',
+                        transform: 'translateY(-50%)'
+                    }
+                },
+                expRole: {
+                    margin: '0',
+                    fontSize: '1.1rem',
+                    fontWeight: '500'
+                },
+                expWhere: {
+                    margin: '0',
+                    fontSize: '1rem',
+                    fontWeight: '400'
+                },
+                expTimeline: {
+                    margin: '0',
+                    fontSize: '0.9rem',
+                    fontWeight: '400',
+                    color: '#8d8c8c'
+                },
+                title: {
+                    fontSize: '1.2rem',
+                },
 })
 
 export default function EducationTabSection({style,title,user}) {
@@ -35,7 +83,7 @@ export default function EducationTabSection({style,title,user}) {
                     <Container key={vals.role} className={classes.eduContainer}>
                             <Row xs="2">
                                 <Col xs="12" md="2" className={classes.eduImgContr}>
-                                        <img src={Logo}/>
+                                        <img src={Logo} alt="Logo"/>
                                 </Col>
                                 <Col xs="12" md="10">
                                     <div className={classes.expInfo}>

@@ -134,7 +134,7 @@ const BannerTabs = ({style,user}) => {
         <TabPane tabId="2">
           <Row>
             <Col sm="12">
-              <AnswersSection answers={answers}/>              
+              <AnswersSection answers={answers} user={user}/>              
             </Col>
           </Row>
         </TabPane>
