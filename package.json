@@ -1,5 +1,5 @@
 {
-  "proxy": "http://localhost:8000",
+  "proxy": "http://localhost/MyApplicationMentor",
   "name": "laravel-app",
   "version": "0.1.0",
   "private": true,

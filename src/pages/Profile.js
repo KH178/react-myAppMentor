@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import { createUseStyles } from 'react-jss';
 import BannerTabs from '../components/BannerTabs';
 import ProfileInfoBanner from '../components/ProfileInfoBanner';
+import ProfieStats from '../ProfileStats';
 import { Container, Row, Col } from 'reactstrap';
+// import '../main.css';
+
 
 const useStyles = createUseStyles({
     profile: {
         backgroundColor: '#f5f5f5',
-        height: '100vh',
+        height: '100%',
         margin: {
             // jss-plugin-expand gives more readable syntax
             top: 4, // jss-plugin-default-unit makes this 5px
@@ -52,13 +55,13 @@ function Profile(props) {
                     <Col xs="12" sm="12" md="9">
                         <div className={classes.profileMain}>
                             <ProfileInfoBanner style={{height: '32rem',width:'100%',stripBgCol:'#c3d0ee'}} user={props.user}/>
-                            <BannerTabs style={{tabFontColor: '#295caa', bgCol: '#416aa6'}}/>
+                            <BannerTabs style={{tabFontColor: '#295caa', bgCol: '#416aa6'}} user={props.user}/>
                         </div>  
                     </Col>  
-                    <Col xs="12" sm="12" md="9">
-                    <div className={classes.profileExtra}>
-
-                    </div>
+                    <Col xs="12" sm="12" md="3">
+                        <div className={classes.profileExtra}>
+                            <ProfieStats/>
+                        </div>
                     </Col>    
                 </Row>
             </Container>      

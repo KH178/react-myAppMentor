@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Row, Col } from 'reactstrap';
 import { createUseStyles } from 'react-jss';
+import ExperienceSection from '../components/ExperienceSection';
+import EducationTabSection from '../components/EducationTabSection';
 import AboutSection from '../components/AboutSection';
 import AnswersSection from '../components/AnswersSection';
 import axios from 'axios'
@@ -32,10 +34,28 @@ const useStyles = createUseStyles({
         boxShadow: '0 0 5 px 1 px rgba(202, 202, 202, 0.75)',
         backgroundColor: '#ffffff',
         borderRadius: '0.3rem'
+    },
+    experienceSectionContr:{
+      margin: {
+        top: '2rem',
+      },
+      padding: '1.7rem 0',
+        boxShadow: '0 0 5 px 1 px rgba(202, 202, 202, 0.75)',
+        backgroundColor: '#ffffff',
+        borderRadius: '0.3rem'
+    },
+    educationSectionContr:{
+      margin: {
+        top: '2rem',
+      },
+      padding: '1.7rem 0',
+        boxShadow: '0 0 5 px 1 px rgba(202, 202, 202, 0.75)',
+        backgroundColor: '#ffffff',
+        borderRadius: '0.3rem'
     }
 })
 
-const BannerTabs = ({style},props) => {
+const BannerTabs = ({style,user}) => {
     const [activeTab, setActiveTab] = useState('1');
     const [about, setAbout] = useState('Nothing Found');
     const [answers, setanswers] = useState('Nothing Found');
@@ -100,7 +120,13 @@ const BannerTabs = ({style},props) => {
           <Row>
             <Col sm="12">
               <div className={classes.aboutSectionContainer}>
-                  <AboutSection about={about} title="About" style={{fontCol: '#295caa'}}/>
+                  <AboutSection about={about} title="About" style={{fontCol: '#295caa',width:'90%'}}/>
+              </div>
+              <div className={classes.experienceSectionContr}>
+                  <ExperienceSection style={{width: '90%'}} title="Experience"/>
+              </div>
+              <div className={classes.educationSectionContr}>
+                  <EducationTabSection style={{width: '90%'}} title="Education" user={user}/>
               </div>
             </Col>
           </Row>

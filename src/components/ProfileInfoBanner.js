@@ -268,6 +268,13 @@ function ProfileInfoBanner({style,user}) {
                     setExperties(data);
                 })
         }
+        // async function fetchExperties2() {
+        //     await axios.get(`http://localhost/MyApplicationMentor/api/allquestions`)
+        //         .then(res => {
+        //             console.log(res);
+        //         })
+        // }
+        // fetchExperties2();
         fetchExperties();
     },[])
     return (
