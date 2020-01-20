@@ -3,26 +3,96 @@ import { useFormik } from 'formik';
 import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import { createUseStyles } from 'react-jss';
 
+import PersonHead from '../images/personHead.png'
+import LockIcon from '../images/LockIcon.png'
+
 const useStyles = createUseStyles({
+  mainHeading:{
+    textAlign: 'center',
+    color:'#4164aa',
+    fontFamily: 'Trocchi',
+    fontSize: '1.8rem',
+    paddingBottom: '0.2rem',
+    marginTop:'1.5rem',
+    position:'relative',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      width: '100%',
+      height: '0.1rem',
+      display: 'block',
+      backgroundColor: '#eaeaea'
+  }
+  },
     formContainer: style=>({
         maxWidth: '30rem',
         margin: 'auto'
-    })
+    }),
+    signLogForm:{
+      width: '80%',
+      margin: 'auto'
+    },
+    inputContainer:{
+      display: 'flex',
+      border: '1px solid #505050',
+      borderRadius: '5px',
+      margin: '2rem 0',
+      position:'relative',
+      '& input':{
+        border: 'none',
+        padding: '1.5rem 1rem',
+        fontFamily: 'Trocchi',
+        color: '#8d8897',
+        '&::Placeholder':{
+          fontSize: '24px',
+          color:'red'
+        }
+      },
+    },
+    inputIconimg:{
+      margin: 'auto',
+      padding: '0rem 0.7rem',
+      display: 'flex',
+      position: 'relative',
+      '& img':{
+        width: '1.5rem',
+        height: '1.5rem',
+        justifyContent:'center'
+      },
+    },
+    signInBtn:{
+      width:'100%',
+      backgroundColor: '#355d98',
+      borderRadius: '7px',
+      overflow: 'hidden',
+      '& button':{
+        width: '100%',
+        background: 'inherit',
+        color: '#fffefe',
+        padding: '0.4rem',
+        fontSize: '1.3rem',
+        cursor: 'pointer',
+        outline: 'inherit',
+        border: '0',
+        fontFamily: 'Merriweather'
+      }
+    }
 })
 // A custom validation function. This must return an object
 // which keys are symmetrical to our values/initialValues
 const validate = values => {
   const errors = {};
-  if (!values.password) {
+  if (!values.loginPassword) {
     errors.lastName = 'Required';
-  } else if (values.password.length < 6) {
-    errors.password = 'Password must be greater then 6 words';
+  } else if (values.loginPassword.length < 6) {
+    errors.loginPassword = 'Password must be greater then 6 words';
   }
 
-  if (!values.email) {
-    errors.email = 'Required';
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+  if (!values.loginEmail) {
+    errors.loginEmail = 'Required';
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.loginEmail)) {
+    errors.loginEmail = 'Invalid email address';
   }
 
   return errors;
@@ -37,8 +107,8 @@ const LoginForm = () => {
   }
   const formik = useFormik({
     initialValues: {
-      password: '',
-      email: '',
+      loginPassword: '',
+      loginEmail: '',
     },
     validate,
     onSubmit: values => {
@@ -48,27 +118,43 @@ const LoginForm = () => {
   const classes = useStyles()
   return (
     <div className={classes.formContainer}>
-        <h1>Login in</h1>
-        <Form onSubmit={formik.handleSubmit}>
-        <Label htmlFor="email">Email Address</Label>
+      <div className={classes.mainHeading}>
+        <p>Sign In</p>
+      </div>
+        <Form onSubmit={formik.handleSubmit} className={classes.signLogForm}>
+        {/* <Label htmlFor="loginEmail">Email Address</Label> */}
+        <div className={classes.inputContainer}>
+          <div className={classes.inputIconimg}>
+            <img src={PersonHead} alt="icon"/>
+          </div>
+          <Input
+              id="loginEmail"
+              name="loginEmail"
+              type="email"
+              onChange={formik.handleChange}
+              value={formik.values.loginEmail}
+              placeholder="Email"
+          />
+          {formik.errors.loginEmail ? <div>{formik.errors.loginEmail}</div> : null}
+        </div>
+        {/* <Label htmlFor="loginPassword">Password</Label> */}
+        <div className={classes.inputContainer}>
+          <div className={classes.inputIconimg}>
+            <img src={LockIcon} alt="icon"/>
+          </div>
         <Input
-            id="email"
-            name="email"
-            type="email"
-            onChange={formik.handleChange}
-            value={formik.values.email}
-        />
-        {formik.errors.email ? <div>{formik.errors.email}</div> : null}
-        <Label htmlFor="lastName">Password</Label>
-        <Input
-            id="password"
-            name="password"
+            id="loginPassword"
+            name="loginPassword"
             type="password"
             onChange={formik.handleChange}
-            value={formik.values.Password}
+            value={formik.values.loginPassword}
+            placeholder="Password"
         />
-        {formik.errors.password ? <div>{formik.errors.password}</div> : null}
-        <button type="submit">Login</button>
+        {formik.errors.loginPassword ? <div>{formik.errors.loginPassword}</div> : null}
+        </div>
+        <div className={classes.signInBtn}>
+          <button type="submit">Sign In</button>
+        </div>
         </Form>
     </div>  
   );

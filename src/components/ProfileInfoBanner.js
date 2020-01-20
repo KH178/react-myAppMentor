@@ -8,9 +8,6 @@ import {Button} from 'reactstrap';
 import uuid from 'uuid';
 
 const useStyles = createUseStyles({
-    '@global': {
-        fontSize: '10px',
-      },
     profileInfoBannerContainer: style => ({
         display: 'flex',
         justifyContent: 'center',
