@@ -8,7 +8,7 @@ const useStyles = createUseStyles({
     }),
     imgContainer:{
         width: '100%',
-        height: '60%',
+        height: '50%',
         position: 'relative'
     },
     imgMinContiner:{
@@ -24,7 +24,11 @@ const useStyles = createUseStyles({
         }
     },
     txtContainer:{
-        height: '40%'
+        height: '40%',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'column'
+
     },
     mainTxt:{
         fontFamily: 'Merriweather',
@@ -50,6 +54,7 @@ const ImgCardslide = ({style,item})=>{
                     <img src={item.img} alt='IMG'/>
                 </div>
             </div>
+
             <div className={classes.txtContainer}>
                 <div className={classes.mainTxt}>
                     <p>{item.title}</p>

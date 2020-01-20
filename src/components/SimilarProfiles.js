@@ -1,6 +1,5 @@
 import React from 'react';
-import './main.css';
-import image from './consultant.png';
+import image from '../images/consultant.png';
 
 
 const SimilarProfiles = (props) => {
@@ -12,8 +11,8 @@ const SimilarProfiles = (props) => {
                 <div className="d-flex justify-content-center align-items-center mb-4">
                     <img className="similar-img" src={image} alt="img"></img>
                     <div className="pl-3 pr-5">
-                        <div class="username">Rohit Rajaram</div>
-                        <div class="user-details">
+                        <div className="username">Rohit Rajaram</div>
+                        <div className="user-details">
                         Co-Founder, Mim-Essay
                         <br></br>
                         ESCP Europe Alumni 
@@ -24,8 +23,8 @@ const SimilarProfiles = (props) => {
                 <div className="d-flex justify-content-center align-items-center mb-4">
                     <img className="similar-img" src={image} alt="img"></img>
                     <div className="pl-3 pr-5">
-                        <div class="username">Rohit Rajaram</div>
-                        <div class="user-details">
+                        < div className = "username" > Rohit Rajaram < /div>
+                        < div className = "user-details" >
                         Co-Founder, Mim-Essay
                         <br></br>
                         ESCP Europe Alumni 
@@ -36,8 +35,8 @@ const SimilarProfiles = (props) => {
                 <div className="d-flex justify-content-center align-items-center mb-4">
                     <img className="similar-img" src={image} alt="img"></img>
                     <div className="pl-3 pr-5">
-                        <div class="username">Rohit Rajaram</div>
-                        <div class="user-details">
+                        < div className = "username" > Rohit Rajaram < /div>
+                        < div className = "user-details" >
                         Co-Founder, Mim-Essay
                         <br></br>
                         ESCP Europe Alumni 

@@ -37,7 +37,52 @@ const useStyles= createUseStyles({
       '& li.active':{
         backgroundColor: '#89ade3'
       }
-    }
+    },
+  //   formContainer:{
+  //     position: 'relative',
+  //     perspective: '150rem'
+  // },
+  // bothForms: {
+  //       position: 'absolute',
+  //       top: 0,
+  //       left: 0,
+  //       width: '100%',
+  //       fontSize: '2rem',
+  //       backfaceVisibility: 'hidden',
+  //       height: '52rem',
+  //       transition: 'all .8s ease',
+  //       borderRadius: '3px',
+  //       overflow: 'hidden',
+  //       boxShadow: '0 1.5rem 4rem rgba(black, .15)',
+  // },
+  //   formFrontSide:{
+  //     transform: 'rotate(180deg)',
+  //     position: 'absolute',
+  //       top: 0,
+  //       left: 0,
+  //       width: '100%',
+  //       fontSize: '2rem',
+  //       backfaceVisibility: 'hidden',
+  //       height: '52rem',
+  //       transition: 'all .8s ease',
+  //       borderRadius: '3px',
+  //       overflow: 'hidden',
+  //       boxShadow: '0 1.5rem 4rem rgba(black, .15)',
+  //   },
+  //   formBackSide:{
+  //     transform: 'rotate(180deg)',
+  //     position: 'absolute',
+  //       top: 0,
+  //       left: 0,
+  //       width: '100%',
+  //       fontSize: '2rem',
+  //       backfaceVisibility: 'hidden',
+  //       height: '52rem',
+  //       transition: 'all .8s ease',
+  //       borderRadius: '3px',
+  //       overflow: 'hidden',
+  //       boxShadow: '0 1.5rem 4rem rgba(black, .15)',
+  //   }
 })
 
 const SignupLoginPage = ({items,itemsBgCol}) => {
@@ -71,7 +116,7 @@ const SignupLoginPage = ({items,itemsBgCol}) => {
           >
              <ImgCardSlide style={{
                bg: item.imgBg,
-               height: '30rem'
+               height: '33rem'
                 }}
                item={item}/>
             {/* <img src={item.src} alt={item.altText} />
@@ -99,9 +144,16 @@ const SignupLoginPage = ({items,itemsBgCol}) => {
                     <CarouselControl direction="next" directionText="Next" onClickHandler={next} /> */}
                     </Carousel>
                 </Col>
-                <Col md="7">
-                    {/* <SignupForm/> */}
+                <Col md="7" className={classes.formContainer}>
+                 <div className={classes.bothForms}>
+                  <div className={classes.formFrontSide}>
                     <LoginForm/>
+                  </div>
+                  <div className={classes.formBackSide}>
+                    {/* <SignupForm/> */}
+                  </div>
+                 </div>  
+                    {/* <SignupForm/> */}
                 </Col>
             </Row>
          </Container>    

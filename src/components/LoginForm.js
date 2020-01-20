@@ -11,7 +11,7 @@ const useStyles = createUseStyles({
     textAlign: 'center',
     color:'#4164aa',
     fontFamily: 'Trocchi',
-    fontSize: '1.8rem',
+    fontSize: '1.6rem',
     paddingBottom: '0.2rem',
     marginTop:'1.5rem',
     position:'relative',
@@ -43,11 +43,17 @@ const useStyles = createUseStyles({
         border: 'none',
         padding: '1.5rem 1rem',
         fontFamily: 'Trocchi',
+        borderLeft: '1px solid #b5b5b5',
+        borderRadius: '0',
         color: '#8d8897',
         '&::Placeholder':{
-          fontSize: '24px',
-          color:'red'
-        }
+          fontSize: '1.2rem',
+          letterSpacing: '0.6px'
+        },
+        '&:focus': {
+          boxShadow: 'none',
+          borderLeft: '1px solid #b5b5b5',
+        },
       },
     },
     inputIconimg:{
@@ -77,7 +83,56 @@ const useStyles = createUseStyles({
         border: '0',
         fontFamily: 'Merriweather'
       }
+  },
+    
+  forgotPass: {
+      color: '#c53e46',
+      fontFamily: 'Merriweather',
+      width: '80%',
+      margin: '1rem auto',
+      textAlign: 'right',
+      cursor: 'pointer'
+  },
+  signCallAction: {
+    width: '80%',
+    margin: '1.5rem auto',
+    color: '#454141',
+    fontFamily: 'Merriweather',
+    '& p': {
+      fontSize: '1rem',
+      '& span': {
+        fontSize: '1.1rem',
+        color: '#2e9557',
+        cursor: 'pointer'
+      }
     }
+  },
+  orHeading: {
+    color: '#9a9a9a',
+    fontFamily: 'Merriweather',
+    textAlign: 'center',
+    position: 'relative',
+    '&:before': {
+      content: '""',
+      position: 'absolute',
+      top: '50%',
+      left: '20%',
+      width: '25%',
+      height: '0.1rem',
+      display: 'block',
+      backgroundColor: '#eaeaea'
+    },
+    '&:after': {
+      content: '""',
+      position: 'absolute',
+      top: '50%',
+      right: '20%',
+      width: '25%',
+      height: '0.1rem',
+      display: 'block',
+      backgroundColor: '#eaeaea'
+    }
+  }
 })
 // A custom validation function. This must return an object
 // which keys are symmetrical to our values/initialValues
@@ -155,8 +210,19 @@ const LoginForm = () => {
         <div className={classes.signInBtn}>
           <button type="submit">Sign In</button>
         </div>
-        </Form>
-    </div>  
+      </Form>
+      <div className={classes.forgotPass}><p>Forgot Password?</p></div>
+      <div className={classes.signCallAction}><p>Don’t have an account? <span>Get Started!</span></p></div>
+      <div className={classes.orHeading}><p>or</p></div>
+      <div className={classes.googleFbSignup}>
+        <div className={classes.googleSignup}>
+          
+        </div>
+        <div className={classes.fbSignup}>
+            
+        </div>
+      </div>
+     </div>  
   );
 };
 

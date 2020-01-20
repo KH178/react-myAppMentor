@@ -86,7 +86,7 @@ export default function ExperienceSection({style,title}) {
                     <Container key={vals.role} className={classes.expContainer}>
                             <Row xs="2">
                                 <Col xs="12" md="2" className={classes.expImgContr}>
-                                        <img src={Logo}/>
+                                        <img src={Logo} alt="logo"/>
                                 </Col>
                                 <Col xs="12" md="10">
                                     <div className={classes.expInfo}>
