@@ -83,7 +83,7 @@ const useStyles = createUseStyles({
     forgotPass: {
         color: '#c53e46',
         fontFamily: 'Merriweather',
-        width: '80%',
+        width: '100%',
         margin: '1rem auto',
         textAlign: 'right',
         cursor: 'pointer'
