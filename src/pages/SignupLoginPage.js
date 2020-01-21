@@ -3,11 +3,12 @@ import SignupForm from '../components/SignupForm';
 import LoginForm from '../components/LoginForm';
 import { createUseStyles } from 'react-jss';
 import ImgCardSlide from '../components/ImgCardSlide';
+import '../styles/cardFlip.css'
+import uuid from 'uuid';
 
 import {
     Carousel,
     CarouselItem,
-    CarouselControl,
     CarouselIndicators,
     Container, Row, Col
   } from 'reactstrap';
@@ -21,11 +22,14 @@ import SignupPageImg2 from '../images/signupPageImg2.png';
 
 
 
-const useStyles= createUseStyles({
+const useStyles = createUseStyles({
     signUpPageContainer:{
         maxWidth: '60rem',
         margin: 'auto',
-        boxShadow: '0 0 25px 2px rgba(206, 206, 206, 0.75)'
+        boxShadow: '0 0 25px 2px rgba(206, 206, 206, 0.75)',
+        position: 'relative',
+        top: '50%',
+        transform: 'translateY(-55%)'
     },
     caroIndi:{
       '& li':{
@@ -37,56 +41,26 @@ const useStyles= createUseStyles({
       '& li.active':{
         backgroundColor: '#89ade3'
       }
+  },
+  colRow: {
+      
     },
-  //   formContainer:{
-  //     position: 'relative',
-  //     perspective: '150rem'
-  // },
-  // bothForms: {
-  //       position: 'absolute',
-  //       top: 0,
-  //       left: 0,
-  //       width: '100%',
-  //       fontSize: '2rem',
-  //       backfaceVisibility: 'hidden',
-  //       height: '52rem',
-  //       transition: 'all .8s ease',
-  //       borderRadius: '3px',
-  //       overflow: 'hidden',
-  //       boxShadow: '0 1.5rem 4rem rgba(black, .15)',
-  // },
-  //   formFrontSide:{
-  //     transform: 'rotate(180deg)',
-  //     position: 'absolute',
-  //       top: 0,
-  //       left: 0,
-  //       width: '100%',
-  //       fontSize: '2rem',
-  //       backfaceVisibility: 'hidden',
-  //       height: '52rem',
-  //       transition: 'all .8s ease',
-  //       borderRadius: '3px',
-  //       overflow: 'hidden',
-  //       boxShadow: '0 1.5rem 4rem rgba(black, .15)',
-  //   },
-  //   formBackSide:{
-  //     transform: 'rotate(180deg)',
-  //     position: 'absolute',
-  //       top: 0,
-  //       left: 0,
-  //       width: '100%',
-  //       fontSize: '2rem',
-  //       backfaceVisibility: 'hidden',
-  //       height: '52rem',
-  //       transition: 'all .8s ease',
-  //       borderRadius: '3px',
-  //       overflow: 'hidden',
-  //       boxShadow: '0 1.5rem 4rem rgba(black, .15)',
-  //   }
+    '@media screen and (max-width: 768px)': {
+      signUpPageContainer: {
+        position: 'static',
+        top: '0',
+        transform: 'translateY(0)'
+      },
+      colRow: {
+      flexDirection: 'row-reverse'
+    },
+    }
+   
 })
 
 const SignupLoginPage = ({items,itemsBgCol}) => {
-    const classes = useStyles(itemsBgCol);
+  const classes = useStyles(itemsBgCol);
+  const [isFlipped,setIsFlipped] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
 
@@ -112,31 +86,34 @@ const SignupLoginPage = ({items,itemsBgCol}) => {
           <CarouselItem
             onExiting={() => setAnimating(true)}
             onExited={() => setAnimating(false)}
-            key={item.src}
+            key={item.key}
           >
              <ImgCardSlide style={{
                bg: item.imgBg,
-               height: '33rem'
+               height: '35rem'
                 }}
                item={item}/>
-            {/* <img src={item.src} alt={item.altText} />
-            <CarouselCaption captionText={item.caption} captionHeader={item.caption} /> */}
           </CarouselItem>
         );
       });
-
-
-
-
-    return (
+  
+    const handleFlipCard = () => {
+      setIsFlipped(!isFlipped)
+  }
+  
+  return (
+      // <div className={classes.signupLoginWrapPage}>
         <div className={classes.signUpPageContainer}>
          <Container>
-            <Row>
+            <Row className={classes.colRow}>
                 <Col className="p-0" md="5">
                     <Carousel
                     activeIndex={activeIndex}
                     next={next}
                     previous={previous}
+                    interval='3500'
+                    ride='carousel'
+              
                     >
                     <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} className={classes.caroIndi}/>
                     {slides}
@@ -144,20 +121,28 @@ const SignupLoginPage = ({items,itemsBgCol}) => {
                     <CarouselControl direction="next" directionText="Next" onClickHandler={next} /> */}
                     </Carousel>
                 </Col>
-                <Col md="7" className={classes.formContainer}>
-                 <div className={classes.bothForms}>
-                  <div className={classes.formFrontSide}>
+                <Col md="7" className={classes.formContainer}> 
+                  {/* <div className={classes.formFrontSide}>
                     <LoginForm/>
                   </div>
                   <div className={classes.formBackSide}>
-                    {/* <SignupForm/> */}
-                  </div>
-                 </div>  
-                    {/* <SignupForm/> */}
+                    <SignupForm/>
+                  </div> */}
+                  <div className="flip-card">
+                      <div className={!isFlipped ? 'flip-card-inner flip-card-inner-flip' : 'flip-card-inner'}>
+                        <div className="flip-card-front">
+                          <LoginForm handleFlip={handleFlipCard}/>
+                        </div>
+                        <div className="flip-card-back">
+                          <SignupForm handleFlip={handleFlipCard}/>
+                        </div>
+                      </div>
+                    </div>
                 </Col>
             </Row>
          </Container>    
         </div>
+    //  </div> 
     )
 }
 
@@ -167,19 +152,22 @@ SignupLoginPage.defaultProps = {
           img: SignupPageImg,
           title: 'Ask your Questions',
           sub: 'An ecosystem built for you to ask questions, seek knowledge, and grow a network.',
-          imgBg: 'linear-gradient(10deg, #ffffff 0%, #c8baff 100%)'
+          imgBg: 'linear-gradient(10deg, #ffffff 0%, #c8baff 100%)',
+          key: uuid()
         },
         {
-            img: SignupPageImg1,
+            img: SignupPageImg2,
             title: 'Get In-Touch with Mentors',
             sub: 'Connect with mentors and get unique insights and dig deep into topics you like to explore.',
-            imgBg: 'linear-gradient(10deg, #ffffff 0%, #bed6ff 100%)'
+            imgBg: 'linear-gradient(10deg, #ffffff 0%, #bed6ff 100%)',
+            key: uuid()
         },
         {
-          img: SignupPageImg2,
+          img: SignupPageImg1,
           title: 'Customize your Feed',
           sub: 'Follow topics and threads for which you have been seeking answers. Join our community to interact with people.',
-          imgBg: 'linear-gradient(10deg, #ffffff 0%, #c68fa7 100%)'
+          imgBg: 'linear-gradient(10deg, #ffffff 0%, #c68fa7 100%)',
+          key: uuid()
         }
       ],
 }

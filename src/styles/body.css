@@ -1,6 +1,6 @@
 html,
-body {
-  height: 100%;
+body > #root{
+  height: 100vh;
   font-family: sans-serif;
 }
 

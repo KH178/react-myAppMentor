@@ -4,20 +4,20 @@ import { createUseStyles } from 'react-jss';
 const useStyles = createUseStyles({
     ImgCardslideCont:style=>({
         background: style.bg,
-        height: style.height
+        height: style.height,
+        position: 'relative'
     }),
     imgContainer:{
-        width: '100%',
         height: '50%',
-        position: 'relative'
+        position: 'relative',
     },
-    imgMinContiner:{
+    imgMinContiner: {
+        marginTop: '1rem',
         position: 'absolute',
+        width: '100%',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%,-50%)',
-        width: '100%',
-        height: '100%',
         '& img':{
             width: '100%',
             height: '100%'
@@ -41,7 +41,6 @@ const useStyles = createUseStyles({
         margin: '0 auto',
         textAlign: 'center',
         fontFamily: 'Merriweather',
-        // fontSize: '1.4'
     }
 })
 
