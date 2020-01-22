@@ -67,8 +67,10 @@ const useStyles = createUseStyles({
         backgroundColor: '#355d98',
         borderRadius: '7px',
         overflow: 'hidden',
+        position: 'relative',
         '& button': {
             width: '100%',
+            height: '100%',
             background: 'inherit',
             color: '#fffefe',
             padding: '0.4rem',
@@ -76,7 +78,11 @@ const useStyles = createUseStyles({
             cursor: 'pointer',
             outline: 'inherit',
             border: '0',
-            fontFamily: 'Merriweather'
+            fontFamily: 'Merriweather',
+            '& img':{
+                marginBottom: '0.2rem',
+                marginRight: '0.5rem'
+            }
         }
     },
 

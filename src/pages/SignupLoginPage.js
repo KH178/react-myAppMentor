@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import SignupForm from '../components/SignupForm';
 import LoginForm from '../components/LoginForm';
+import ForgotPasswordSignin from '../components/ForgetPassSignin';
 import { createUseStyles } from 'react-jss';
 import ImgCardSlide from '../components/ImgCardSlide';
 import '../styles/cardFlip.css'
@@ -61,6 +62,7 @@ const useStyles = createUseStyles({
 const SignupLoginPage = ({items,itemsBgCol}) => {
   const classes = useStyles(itemsBgCol);
   const [isFlipped,setIsFlipped] = useState(true);
+  const [isForgotPassShow,setForgotPassShow] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);
     const [animating, setAnimating] = useState(false);
 
@@ -100,6 +102,9 @@ const SignupLoginPage = ({items,itemsBgCol}) => {
     const handleFlipCard = () => {
       setIsFlipped(!isFlipped)
   }
+  const handleForgot = ()=>{
+    setForgotPassShow(!isForgotPassShow);
+  }
   
   return (
       // <div className={classes.signupLoginWrapPage}>
@@ -108,33 +113,39 @@ const SignupLoginPage = ({items,itemsBgCol}) => {
             <Row className={classes.colRow}>
                 <Col className="p-0" md="5">
                     <Carousel
-                    activeIndex={activeIndex}
-                    next={next}
-                    previous={previous}
-                    interval='3500'
-                    ride='carousel'
-              
-                    >
-                    <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} className={classes.caroIndi}/>
-                    {slides}
-                    {/* <CarouselControl direction="prev" directionText="Previous" onClickHandler={previous} />
-                    <CarouselControl direction="next" directionText="Next" onClickHandler={next} /> */}
+                      activeIndex={activeIndex}
+                      next={next}
+                      previous={previous}
+                      interval='3500'
+                      ride='carousel'
+                
+                      >
+                      <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={goToIndex} className={classes.caroIndi}/>
+                      {slides}
                     </Carousel>
                 </Col>
                 <Col md="7" className={classes.formContainer}> 
-                  {/* <div className={classes.formFrontSide}>
-                    <LoginForm/>
-                  </div>
-                  <div className={classes.formBackSide}>
-                    <SignupForm/>
-                  </div> */}
+     
                   <div className="flip-card">
                       <div className={!isFlipped ? 'flip-card-inner flip-card-inner-flip' : 'flip-card-inner'}>
                         <div className="flip-card-front">
-                          <LoginForm handleFlip={handleFlipCard}/>
+
+                          {!isForgotPassShow &&
+                          <div className='slide-card-inside-front slide-absolute-in'>
+                            <ForgotPasswordSignin handleForgotCard={handleForgot}/>
+                          </div>
+                          }  
+                          {isForgotPassShow && 
+                          <>
+                            <div className='slide-card-inside-front'>
+                              <LoginForm handleFlip={handleFlipCard} handleForgotCard={handleForgot}/>
+                            </div>
+                          </>  
+                          }                        
+                          
                         </div>
                         <div className="flip-card-back">
-                          <SignupForm handleFlip={handleFlipCard}/>
+                        <SignupForm handleFlip={handleFlipCard}/>
                         </div>
                       </div>
                     </div>

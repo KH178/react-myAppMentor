@@ -1,14 +1,14 @@
 import React from 'react';
 import { useFormik } from 'formik';
-import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, Input } from 'reactstrap';
 import useStyles from '../styles/LoginComponentStyle';
 
 const validate = values => {
   const errors = {};
   if (!values.name) {
     errors.name = 'Required';
-  } else if (values.name.length > 15) {
-    errors.name = 'Must be 15 characters or less';
+  } else if (values.name.length > 50) {
+    errors.name = 'Must be 50 characters or less';
   }
 
   if (!values.password) {
@@ -120,4 +120,4 @@ const SignupForm = ({handleFlip}) => {
   );
 };
 
-export default SignupForm;
+export default React.memo(SignupForm);
