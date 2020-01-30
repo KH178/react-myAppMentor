@@ -4,6 +4,8 @@ import { Col, Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap
 import { createUseStyles } from 'react-jss';
 import useStyles from '../styles/LoginComponentStyle'
 
+import axios from 'axios';
+
 import PersonHead from '../images/personHead.png'
 import LockIcon from '../images/LockIcon.png'
 
@@ -42,6 +44,16 @@ const LoginForm = ({handleFlip,handleForgotCard}) => {
     validate,
     onSubmit: values => {
       alert(JSON.stringify(values, null, 2));
+      axios.post('http://localhost/MyApplicationMentor/userlogin', {
+        email: values.loginEmail,
+        password: values.loginPassword
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     },
   });
   const classes = useStyles()

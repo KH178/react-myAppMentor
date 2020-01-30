@@ -163,6 +163,18 @@ const useStyles = createUseStyles({
             }
         }
     },
+    nameInputContainer:{
+        display: 'flex',
+        justifyContent: 'space-between',
+        '& $inputContainer': {
+            width: '48%',
+            marginTop: '1rem',
+            marginBottom: '0',
+            '& input::Placeholder': {
+                fontSize: '0.9rem'
+            }
+        }
+    },
       // googleFBSignIn BTN
   googleFbSignup: {
     display: 'flex',
